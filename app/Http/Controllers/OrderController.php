@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Services\OrderService;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
+    use AuthorizesRequests;
     public function __construct(protected OrderService $orderService) {}
 
     public function store(Request $request)
@@ -35,7 +37,13 @@ class OrderController extends Controller
     public function index()
     {
         $orders = $this->orderService->listUserOrders(auth()->id());
+
+        foreach ($orders as $order) {
+            $this->authorize('view', $order);
+        }
+
         return response()->json($orders);
     }
+
 }
 
