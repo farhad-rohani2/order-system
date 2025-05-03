@@ -18,3 +18,8 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::view('/admin/orders', 'admin.orders')->middleware(['auth', 'admin'])->name('admin.orders');
+Route::view('/user/orders', 'user.orders')->middleware('auth')->name('user.orders');
+Route::view('/products', 'products.index')->middleware('auth')->name('products.index');
+
