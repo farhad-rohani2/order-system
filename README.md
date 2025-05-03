@@ -66,3 +66,15 @@ sail logs -f              #لاگ‌ها
 
 8.
 http://localhost:8000
+
+9.کاربران:
+
+ادمین
+
+username:admin@example.com
+password:admin@example.com
+
+کاربر معمولی
+
+username:simple-user@example.com
+password:simple-user@example.com
