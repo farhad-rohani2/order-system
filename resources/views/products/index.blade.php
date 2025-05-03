@@ -22,14 +22,6 @@
     </div>
 
     <script>
-        @php
-            if ($token=session('token')){
-            }else{
-                $user = Auth::user();
-                $token = $user->createToken('product-page')->plainTextToken;
-                session(['token'=>$token]);
-            }
-        @endphp
         function productList() {
             return {
                 products: [],
@@ -38,7 +30,7 @@
                         method: 'GET',
                         headers: {
                             'Accept': 'application/json',
-                            'Authorization': `Bearer {{$token}}`
+                            'Authorization': `Bearer {{session('token')}}`
                         }
                     })
                         .then(res => res.json())

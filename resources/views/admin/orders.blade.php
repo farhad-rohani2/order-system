@@ -38,14 +38,6 @@
     </div>
 
     <script>
-        @php
-            if ($token=session('token')){
-            }else{
-                $user = Auth::user();
-                $token = $user->createToken('product-page')->plainTextToken;
-                session(['token'=>$token]);
-            }
-        @endphp
         function orderAdmin() {
             return {
                 orders: [],
@@ -54,7 +46,7 @@
                         method: 'GET',
                         headers: {
                             'Accept': 'application/json',
-                            'Authorization': `Bearer {{$token}}`
+                            'Authorization': `Bearer {{session('token')}}`
                         }
                     })
                         .then(res => res.json())
@@ -67,7 +59,7 @@
                         headers: {
                             'Content-Type': 'application/json',
                             'Accept': 'application/json',
-                            'Authorization': `Bearer {{$token}}`
+                            'Authorization': `Bearer {{session('token')}}`
                         },
                         body: JSON.stringify({ status: order.status })
                     })

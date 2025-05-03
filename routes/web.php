@@ -17,9 +17,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
-Route::view('/admin/orders', 'admin.orders')->middleware(['auth', 'admin'])->name('admin.orders');
-Route::view('/user/orders', 'user.orders')->middleware('auth')->name('user.orders');
-Route::view('/products', 'products.index')->middleware('auth')->name('products.index');
+Route::view('/admin/orders', 'admin.orders')->middleware(['auth', 'admin', 'ensureSanctumToken'])->name('admin.orders');
+Route::view('/user/orders', 'user.orders')->middleware(['auth', 'ensureSanctumToken'])->name('user.orders');
+Route::view('/products', 'products.index')->middleware(['auth', 'ensureSanctumToken'])->name('products.index');
 
